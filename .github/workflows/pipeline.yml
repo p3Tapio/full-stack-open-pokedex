@@ -40,3 +40,16 @@ jobs:
           healthcheck: "https://mighty-retreat-44919.herokuapp.com/health"
           delay: 5
           rollbackonhealthcheckfailed: true
+  tag_release:
+    needs: [lint_test_and_deploy_job]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: master
+          DRY_RUN: true
+
