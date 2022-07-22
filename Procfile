@@ -1,1 +1,1 @@
-web: broken procfile :(
+web: node app.js
