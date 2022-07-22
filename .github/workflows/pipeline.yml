@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - master
+  pull_request:    
+    branches: [master]    
+    types: [opened, synchronize]
 
 jobs:
-  lint_test_job:
+  lint_test_and_deploy_job:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
