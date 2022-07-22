@@ -44,6 +44,7 @@ jobs:
     needs: [lint_test_and_deploy_job]
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.36.0
