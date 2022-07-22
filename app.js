@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const { version } = require('./package.json')
+let { version } = require('./package.json')
+version = version.replaceAll('"', '')
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 5000
 
@@ -11,12 +12,12 @@ app.get('/health', (_req, res) => {
 })
 
 app.get('/version', (_req, res) => {
-  res.send(`version: ${version.replaceAll('"', '')}`) // change this string to ensure a new version deployed
+  res.send(`version: ${version}`) // change this string to ensure a new version deployed
 })
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
-    `Server started on port ${PORT}\n🚀 v${version.replaceAll('"', '')}`
+    `Server started on port ${PORT}\n🚀 v${version}`
   )
 })
